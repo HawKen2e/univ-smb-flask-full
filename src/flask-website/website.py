@@ -1,10 +1,15 @@
 from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
 @app.route("/")
 def start(): 
-    return render_template('sign_in.html')
+    response = requests.post('http://127.0.0.1:5001//api/recevoir-donnees')
+    if response.ok:         #print(response) -> <Response [200]>
+        return render_template('sign_in.html')
+    else:
+        return render_template('sign_in.html')
 
 @app.route("/index", methods=['POST'])
 def index():
@@ -64,6 +69,10 @@ def ajout_serv_reverse_proxy():
 @app.route("/suppr_serv_reverse_proxy")
 def suppr_serv_reverse_proxy(): 
     return render_template('suppr_serv_reverse_proxy.html')
+
+@app.route("/api-test")
+def api_test():
+    return test()
 
 def check_sign_in():
     return True
