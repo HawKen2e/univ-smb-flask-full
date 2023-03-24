@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Accueil{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<p>
+    <h1>a modifier pour ajouter un serveur web dans la bdd </h1>
+</p>
+<form action="#" method="post">
+  <div>
+    <label for="name">Login :</label>
+    <input type="text" id="login" name="login">
+</div>
+<div>
+    <label for="Password">Password :</label>
+    <input type="password" id="password" name="user_password">
+</div>
+<div>
+    <label for="name">Login :</label>
+    <input type="text" id="login" name="login">
+</div>
+<div>
+    <label for="Password">Password :</label>
+    <input type="password" id="password" name="user_password">
+</div>
+<button type="submit"> sign in </button>
+</form>
+{% endblock %}
