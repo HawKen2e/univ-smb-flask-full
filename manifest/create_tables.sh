@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sudo mysql -e "USE identity";
+sudo mysql -e "USE identity;"
 
 #create table user
 sudo mysql -e "CREATE TABLE IF NOT EXISTS user(
         `login` varchar (50) not null,
         `first_name` varchar (50) not null,
         `last_name` varchar (50) not null,
-        PRIMARY KEY (`login`))";
+        PRIMARY KEY (`login`));"
 
 #table user_pw
 sudo mysql -e  "CREATE TABLE IF NOT EXISTS user_pw(
