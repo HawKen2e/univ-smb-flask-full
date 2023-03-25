@@ -1,19 +1,20 @@
-from flask import Flask, render_template
+from flask import Flask, render_template , request
 import requests
 
 app = Flask(__name__)
 
 @app.route("/")
 def start(): 
-    response = requests.post('http://127.0.0.1:5001//api/recevoir-donnees')
-    if response.ok:         #print(response) -> <Response [200]>
-        return render_template('sign_in.html')
-    else:
-        return render_template('sign_in.html')
+    return render_template('sign_in.html')
+    
 
 @app.route("/index", methods=['POST'])
 def index():
-    if (check_sign_in()):
+    login = request.form['login']
+    passsword = request.form['password']
+    donnees = list([login,passsword])
+    response = requests.post('http://127.0.0.1:5001/api/recevoir-donnees',json=donnees)
+    if response.ok:         #print(response) -> <Response [200]>
         return render_template('start.html')
     else:
         return render_template('start.html')
