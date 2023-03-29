@@ -30,5 +30,5 @@ def add_password():
   mydb.close()
   return ("donnees ajouté avec succes")
 
-add_user()
-add_password()
+#add_user()
+#add_password()

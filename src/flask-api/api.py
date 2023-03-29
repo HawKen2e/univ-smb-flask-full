@@ -1,9 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 import json
 import mysql.connector
 from db import mydb
 
 app = Flask(__name__)
+
+url_link_website = "http://127.0.0.1:5001"
 
 @app.route("/")
 def hello():
@@ -19,7 +21,6 @@ def recevoir_donnees():
 def send_slq_pw_user(donnees):
     login =[]
     login.insert(0, donnees[0])
-    #login = donnees[0]
     pw = donnees[1]
     cursor = mydb.cursor()
     cursor.execute("SELECT * FROM user_pw WHERE login_pw = %s", (login))
@@ -29,9 +30,12 @@ def send_slq_pw_user(donnees):
     for row in rows:
         result.append({'login_pw': row[0], 'password': row[1]})
     if (result[0]['password'] == pw) :
-        return True
+        bool_param = True
+        redirect(url_for('.flask-website.website.index', bool=bool_param))
     else :
-        return False
+        bool_param = False
+        redirect(url_for('/flask-website/website.py/index', bool=bool_param))
+
    
 
 #print(type(mydb))

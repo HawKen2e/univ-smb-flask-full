@@ -2,6 +2,7 @@ from flask import Flask, render_template , request
 import requests
 
 app = Flask(__name__)
+url_link_api = "http://127.0.0.1:5000"
 
 @app.route("/")
 def start(): 
@@ -15,7 +16,7 @@ def index():
     
     donnees = list([login,passsword])
     print(donnees)
-    response = requests.post('http://127.0.0.1:5000/api/recevoir-donnees',json=donnees)
+    response = requests.post(url_link_api + "/api/recevoir-donnees",json=donnees)
     print(response)
     if response.ok:         #print(response) -> <Response [200]>
         return render_template('start.html')
@@ -76,7 +77,9 @@ def suppr_serv_reverse_proxy():
 
 @app.route("/api-test")
 def api_test():
-    return test()
+    parametre_get = request.args.get('bool')
+    print(parametre_get)
+    return 'true'
 
 def check_sign_in():
     return True
