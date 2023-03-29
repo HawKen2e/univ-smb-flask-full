@@ -1,18 +1,12 @@
-{% extends "layout.html" %}
-{% block title %}Accueil{% endblock %}
-{% block head %}
-{{ super() }}
-{% endblock %}
-{% block content %}
+
 <form action="/index" method="post">
   <div>
     <label for="Login">Login :</label>
-    <input type="text" id="login" name="login">
+    <input type="text" id="login" name="login" required>
 </div>
 <div>
     <label for="Password">Password :</label>
-    <input type="password" id="password" name="password">
+    <input type="password" id="password" name="password" required>
 </div>
 <button type="submit"> sign in </button>
 </form>
-{% endblock %}

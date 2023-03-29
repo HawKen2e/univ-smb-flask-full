@@ -8,12 +8,15 @@ def start():
     return render_template('sign_in.html')
     
 
-@app.route("/index", methods=['POST'])
+@app.route("/index", methods=['GET','POST'])
 def index():
     login = request.form['login']
     passsword = request.form['password']
+    
     donnees = list([login,passsword])
-    response = requests.post('http://127.0.0.1:5001/api/recevoir-donnees',json=donnees)
+    print(donnees)
+    response = requests.post('http://127.0.0.1:5000/api/recevoir-donnees',json=donnees)
+    print(response)
     if response.ok:         #print(response) -> <Response [200]>
         return render_template('start.html')
     else:
