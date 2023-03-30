@@ -21,13 +21,32 @@ def index():
         return render_template('start.html')
     else:
         return render_template('sign_in.html')
-
+    
 @app.route("/users")
 def users():
     response = requests.get(url_link_api + "/api/user-data")
     data = response.json()
     print(data)
     return render_template('users.html', users=data)
+
+@app.route("/sign_up")
+def sign_up():
+    return render_template('sign_up.html')
+
+@app.route("/register", methods=['POST'])
+def register():
+    login = request.form['login']
+    password = request.form['password']
+    confirmation_pass = request.form['confirm_password']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    if (password == confirmation_pass):
+        data = list([login,password,first_name,last_name])
+        response = requests.post(url_link_api + "/api/add-user",json=data)
+        print(response)
+        if response.ok: 
+            return render_template('start.html')
+    return render_template('sign_up.html')
 
 @app.route("/list_serv_web")
 def list_serv_web(): 
