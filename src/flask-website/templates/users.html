@@ -4,9 +4,23 @@
 {{ super() }}
 {% endblock %}
 {% block content %}
-<ul>
-    <li>
-        liste des utilisateurs qui ont un compte sur le site Web
-    </li>
-</ul>        
+<table>
+    <thead>
+        <tr>
+            <td>prenom</td>
+            <td>nom</td>
+            <td>login</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user['first_name'] }}</td>
+            <td>{{ user['last_name'] }}</td>
+            <td>{{ user['login'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

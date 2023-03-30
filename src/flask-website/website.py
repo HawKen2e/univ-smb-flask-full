@@ -1,4 +1,5 @@
-from flask import Flask, render_template , request
+from flask import Flask, request, redirect, url_for, jsonify, render_template
+import json
 import requests
 
 app = Flask(__name__)
@@ -9,23 +10,24 @@ def start():
     return render_template('sign_in.html')
     
 
-@app.route("/index", methods=['GET','POST'])
+@app.route("/index", methods=['POST'])
 def index():
     login = request.form['login']
     passsword = request.form['password']
-    
     donnees = list([login,passsword])
-    print(donnees)
     response = requests.post(url_link_api + "/api/recevoir-donnees",json=donnees)
-    print(response)
     if response.ok:         #print(response) -> <Response [200]>
+        #ajouter la creation de la variable de session ici
         return render_template('start.html')
     else:
-        return render_template('start.html')
+        return render_template('sign_in.html')
 
 @app.route("/users")
-def users(): 
-    return render_template('users.html')
+def users():
+    response = requests.get(url_link_api + "/api/user-data")
+    data = response.json()
+    print(data)
+    return render_template('users.html', users=data)
 
 @app.route("/list_serv_web")
 def list_serv_web(): 
