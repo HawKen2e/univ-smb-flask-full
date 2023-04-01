@@ -29,6 +29,11 @@ def donnee_utilisateur():
         users.append(user)
     return jsonify(users)
 
+@app.route('/api/recevoir-donnees', methods=['POST'])
+def recevoir_donnees():
+    donnees = request.json
+    if (send_slq_pw_user(donnees)):
+        return 'je vien de api.py'
 
 def send_user_datas():
     cursor = mydb.cursor()
